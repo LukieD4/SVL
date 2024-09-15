@@ -23,11 +23,26 @@ Will there be support outside of windows? Ideally no,
 -----------------------------------------------   
 # Installation  
   
->[1] Run the batch file provided to fulfill all pre-requirements.  
+>[1] Run the batch file ('pre-req') provided to fulfill all pre-requirements.  
 >-?>[1a] If it fails to work, try installing Python: https://www.python.org/downloads/    
 >-?>[1b] Run the installer (tested with 3.12.6) + make sure to tick ['ADD to PATH'](https://miro.medium.com/v2/resize:fit:1344/0*7nOyowsPsGI19pZT.png)  
 >[2] Run 'SVL.py'  
->[3] Give yourself a pat on the back.  
------------------------------------------------  
+>[3] Give yourself a pat on the back and proceed to Usage Guide below.    
+        
+       
+What does the batch file install?   
+-python libraries including...
+> numpy   
+> pillow (PIL)   
+> scikit-image (+skimage)   
+> opencv-python (cv2)   
+
+References to all dependencies (do not install, if you're on Windows then you're all good):  
+> tkinter   (pre-installed w/ Python on Windows)   
+> os        (possibly varied outcome)   
+> re        (pre-installed w/ Python)   
+> math      (pre-installed w/ Python)   
+> time      (pre-installed w/ Python)   
+-----------------------------------------------    
 # Usage Guide
 TBD
