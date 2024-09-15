@@ -10,6 +10,15 @@ Sample video was found at random and taken from:
 https://www.furaffinity.net/view/52184319/
 (I do not own this video, nor is it condemned under the liscense for this project)  
 
+# Supported platforms  
+> Windows ✅  
+> Linux ❓  
+> MacOS ❓
+   
+Will there be support outside of windows? Ideally no,
+  everything that may be supported is merely coincidental,
+    but I'll be glad if it does magically work on other platforms. 
+
 -----------------------------------------------   
 # Installation  
   
