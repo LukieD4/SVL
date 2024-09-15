@@ -60,14 +60,15 @@ def AskForValue(message: str, datatype: type):
 def AskForValueFromList(returnVariable, referenceList, message: str, datatype: type):
     returnVariable = None
     while returnVariable == None:
-        returnVariable = AskForValue("\nSelect:\n Low quality, but fast:\n  [1] GIF\n  [2] JPG\n  [3] JPEG\n  [5] WEBP\n Normal quality, runs fine:\n  [6] JP2\n  [7] PNG\n  [8] TIFF\n High quality, but slow:\n  [9] EXR\n  [10] HDR\n  [11] PPM\n  [12] PGM\n  [13] PBM\n",int)
-        if 1 <= returnVariable < len(referenceList)+1:
+        returnVariable = AskForValue(message,datatype)-1 #Minus 1 to fit within python lists, heh this aint Lua, Lukie!
+        if 0 <= returnVariable < len(referenceList)+1:
             # Passed checks, is valid
-            returnVariable = referenceList[returnVariable-2]
+            returnVariable = referenceList[returnVariable]#referenceList[returnVariable-2]
         else:
             # Failed checks, invalid
             os.system("cls")
             returnVariable = None
+    return returnVariable
 
 
 ## 
@@ -84,17 +85,11 @@ end_offset      = AskForValue(f"End offset in seconds (type '{math.ceil(duration
 end_frame        = int(end_offset * frames_per_second)
 starting_frame = SelectedVideo.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
 # Quality format
-quality_format = None
 quality_whitelist = ["GIF","JPG","JPEG","WEBP","JP2","PNG","TIFF","EXR","HDR","PPM","PGM","PBM"]
-while quality_format == None:
-    quality_format = AskForValue("\nSelect:\n Low quality, but fast:\n  [1] GIF\n  [2] JPG\n  [3] JPEG\n  [5] WEBP\n Normal quality, runs fine:\n  [6] JP2\n  [7] PNG\n  [8] TIFF\n High quality, but slow:\n  [9] EXR\n  [10] HDR\n  [11] PPM\n  [12] PGM\n  [13] PBM\n",int)
-    if 1 <= quality_format < len(quality_whitelist)+1:
-        # Passed checks, is valid
-        quality_format = quality_whitelist[quality_format-2]
-    else:
-        # Failed checks, invalid
-        os.system("cls")
-        quality_format = None
+quality_format = AskForValueFromList(quality_format,quality_whitelist,"\nSelect:\n Low quality, but fast:\n  [1] GIF\n  [2] JPG\n  [3] JPEG\n  [4] WEBP\n Normal quality, runs fine:\n  [5] JP2\n  [6] PNG\n  [7] TIFF\n High quality, but slow:\n  [8] EXR\n  [9] HDR\n  [10] PPM\n  [11] PGM\n  [12] PBM\n",int) # Time wasted solving 5 doesn't come after 3: 1+1/2hrs 
+
+
+
 
 #time.sleep(5)
 OutputCurrentData()
@@ -202,17 +197,23 @@ for file in files:
 
 
 
-#import CreateGIF
-from CreateVID import create_video_from_images as CreateVideo
+# Ask user for which file format they want their video converted to
+QueryFileFormatToUser, QueryFileType = None,None
+QueryFileFormatToUser = AskForValueFromList(QueryFileFormatToUser,["VIDEO","GIF"],"\nSelect a desired output:\n [1] VIDEO\n [2] GIF\n",int)
+if f"{2}" in QueryFileFormatToUser:
+    from CreateGIF import create_gif_from_images as CreateGIF
+    QueryFileType = AskForValueFromList(QueryFileType,["gif","webp"],"\nSelect animated export format:\n [1] GIF\n [2] WEBP",int)
+    GIF = CreateGIF(files_to_collate,f"{VideoNameWithoutExtension}-trim.{QueryFileType}", duration=frame_millisecond*100)#frame_millisecond)
 
-#video_output_file = os.path.join(converted_folder, f"{VideoName}")
-CreateVideo(files_to_collate, f"{VideoNameWithoutExtension}-trim{VideoExtension}", frame_rate=frames_per_second)  # Set frame rate to 30 fps
+else:
+    from CreateVID import create_video_from_images as CreateVideo
+    ValidFileTypes = ["mp4","webm","avi","mov","mkv","wmv","flv","mpg","mpeg","3gp","mts","m2ts","ogv","rm","divx","mxf"]
+    QueryFileType = AskForValueFromList(QueryFileType,ValidFileTypes,"\nSelect video export format:\n Common filetypes:\n  [1] MP4\n  [2] WEBM\n  [3] AVI\n  [4] MOV\n  [5] MKV\n  [6] WMV\n  [7] FLV\n  [8] MPG\n  [9] MPEG\n Misc filetypes:\n  [10] 3GP\n  [11] MTS\n  [12] M2TS\n  [13] OGV\n  [14] RM\n  [15] DIVX\n  [16] MXF\n",int)
+    print(QueryFileType,type(QueryFileType))
+    CreateVideo(files_to_collate, f"{VideoNameWithoutExtension}-trim.{QueryFileType}", frame_rate=frames_per_second)
 
-#GIF_output_file = os.path.join(converted_folder, f"{VideoName}.gif")
-#GIF = CreateGIF.create_gif_from_images(files_to_collate,"_OUTPUT.webp", duration=frame_millisecond*100)#frame_millisecond)#AskForValue(""))
 
 
-## FIX THE FUCKIN ISSUE WITH 'DURATION', it doesnt change the speed of frames in between no matter how hard i try
 
 
 exit()
