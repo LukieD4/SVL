@@ -9,3 +9,14 @@ This project was designed for fun and ease to trim short form content used for G
 Sample video was found at random and taken from:
 https://www.furaffinity.net/view/52184319/
 (I do not own this video, nor is it condemned under the liscense for this project)
+
+----------------------------------------------- 
+# Installation
+[1] Run the batch file provided to fulfill all pre-requirements.
+-?>[1a] If it fails to work, try installing Python: https://www.python.org/downloads/
+-?>[1b] Run the installer (tested with 3.12.6) + make sure to tick 'ADD TO PATH'
+[2] Run 'SVL.py'
+[3] Give yourself a pat on the back.
+-----------------------------------------------
+# Usage Guide
+TBD
