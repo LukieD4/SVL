@@ -1,5 +1,6 @@
 # SVL
-Seamless Video Looper
+Seamless Video Looper    
+> Message will be removed soon: files are still being updated and should be finished by tonight (15/09/24-4:52pm-UK).   
 
 A puddle of python scripts used to query the user with a set basis of parameters to curate a Seamless Video.
 
