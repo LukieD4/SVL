@@ -32,5 +32,9 @@ def create_video_from_images(image_paths, video_path, frame_rate):
         else:
             print(f"Error loading image from {image_path}")
 
+    
+    # Complete video writing
     video_writer.release()
-    print(f"Video saved to {video_path}")
+
+    # Return the newly made video
+    return video_path
