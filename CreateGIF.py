@@ -40,3 +40,4 @@ def create_gif_from_images(image_paths, gif_path, duration):
         return gif_path
     else:
         print("No images to create GIF")
+        

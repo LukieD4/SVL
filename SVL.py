@@ -18,7 +18,7 @@ RMDIR_WHEN_FINISHED         = True
 # Streamline Settings, set to None for defaults
 DEFAULT_MEDIA_FILE              = None #"wave.webm"
 DEFAULT_STARTOFFSET             = None #2.5
-DEFAULT_ENDOFFSET               = None #3.429
+DEFAULT_ENDOFFSET               = None #3
 DEFAULT_FRAME_QUALITY_FORMAT    = None #"PNG"
 DEFAULT_FRAME_IGNORE_AMOUNT     = None #11
 DEFAULT_QUERY_FILEFORMAT        = None #"VIDEO"
@@ -145,7 +145,8 @@ def AskForValue(message: str, datatype: type):
         GetInputValue = datatype(input(message))
 
         # Display message? Should it though?
-        DisplayMessage(f"{GetInputValue},{type(GetInputValue)}")
+        if DEBUG_MODE == True:
+            DisplayMessage(f"{GetInputValue},{type(GetInputValue)}")
         if datatype != type(GetInputValue):
            die() # type: ignore
     except:
@@ -264,12 +265,11 @@ while indexFrame <= end_frame:
     except:
         error_frames += 1
 
+    DisplayMessage(f"{OutputCurrentData()}\nProcessing: {iterationFrame}/{end_frame}\nBest frame: {best_frame} | {best_frame_score}")
+    if DEBUG_MODE == True:
+        DisplayMessage(f"DEBUG:\nstartframe:{start_frame}, offset{start_offset}\nindexframe:{indexFrame}\niterationframe:{iterationFrame}\nframefilepath:{frame_file_path}\n\n")
     
-    DisplayMessage(f"Processing: {iterationFrame}/{end_frame}\nBest frame: {best_frame} | {best_frame_score}")
-    DisplayMessage(f"DEBUG:\nstartframe:{start_frame}, offset{start_offset}\nindexframe:{indexFrame}\niterationframe:{iterationFrame}\nframefilepath:{frame_file_path}\n\n")
-    indexFrame += 1 # Forward onto next frame
-    
-    #time.sleep(1)  
+    indexFrame += 1 # Forward onto next frame  
 
 
 
@@ -320,7 +320,6 @@ else:
     from CreateVID import create_video_from_images as CreateVideo
     ValidFileTypes = ["mp4","webm","avi","mov","mkv","wmv","flv","mpg","mpeg","3gp","mts","m2ts","ogv","rm","divx","mxf"]
     QueryFileType = ReferOrAsk(DEFAULT_QUERY_FILETYPE,lambda:AskForValueFromList(QueryFileType,ValidFileTypes,"\nSelect video export format:\n Common filetypes:\n  [1] MP4\n  [2] WEBM\n  [3] AVI\n  [4] MOV\n  [5] MKV\n  [6] WMV\n  [7] FLV\n  [8] MPG\n  [9] MPEG\n Misc filetypes:\n  [10] 3GP\n  [11] MTS\n  [12] M2TS\n  [13] OGV\n  [14] RM\n  [15] DIVX\n  [16] MXF\n",int))
-    print(QueryFileType,type(QueryFileType))
     New_Media = CreateVideo(files_to_collate, f"{VideoNameWithoutExtension}{OUTPUT_SUFFIX}.{QueryFileType}", frame_rate=frames_per_second)
 
 
@@ -343,5 +342,5 @@ DisplayMessage(f"{OutputCurrentData()}\n** NEW MEDIA COMPLETE **")
 shutil.move(New_Media, Expected_Media)
 # Asks the user via visual confirmation before closing
 if CLOSE_WHEN_FINISHED == False:
-    input("\nPress any key to close..")
+    input("\nPress any key to close..\n")
 exit()
