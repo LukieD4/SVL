@@ -38,16 +38,16 @@ Upon using the program, a CLI window will appear and this will be all there is t
    > ( This is **the main reference frame that determines** the **similarity** rating **of all the other frames** )
 ### End Offset  
    > Input an end time for where you want the frame scanning to stop.   
-   > ( This **doesn't mean** the **end frame** you choose **is the last frame of the to-be-exported video**!!   
+   > ( This **doesn't mean** the **end frame** you choose **is the last frame of the to-be-exported video**!! )    
 ### Frame Export Format   
    > Choose how you would like to export each individual frames ( this is the stage before compiling a new video )   
-   > ( This **impacts** **video quality** and **file size**. *Preferably I pick PNG*.   
+   > ( This **impacts** **video quality** and **file size**. *Preferably I pick PNG*. )   
 ### Ignore Frames
    > A buffer zone. Insert a number to skip early decisions made by the program.  
    > ( This is **to prevent** the **best frame** from **being chosen too early** with a bias frame score, **resulting** in an **extremely short video** )
 ### Desired Output and Media Export Format  
-   > Pick how you would like the finale piece to format as.
------------------------------------------------
+   > Pick how you would like the final media to format as.
+-----------------------------------------------  
 # Current Data Descriptions  
 **Path**: *Filepath directing to where your selected media is located*  
 **Media**: *Name of your selected media, with file extension attached*  
@@ -62,4 +62,21 @@ Upon using the program, a CLI window will appear and this will be all there is t
   **MFrame**: *Main (reference) frame*  
   **BFrame**: *Best frame*  
   **Errors**: *Number of media compile errors*  
-> Errors usually occur if the end-offset was too high, resulting in the program reading **past** the bounds of the video, resulting in reading null data. Or in worse case scenario, your media wasn't encoded properly and is or corrupted.
+> Errors usually occur if the end-offset was too high, resulting in the program reading **past** the bounds of the video, resulting in reading null data. Or in worse case scenario, your media wasn't encoded properly and is or corrupted.  
+-----------------------------------------------  
+# Future Features -> v1.4  
+- Proper media encoding for formats other than MP4.  
+- GIF exporting.
+- Accurate texts for start and end offset input requirements.
+- Shift the main reference frame with an offset. *potentially not to be implemented*.
+-----------------------------------------------  
+# Known Issues  
+- Selecting a video outside current working directory crashes the program.  
+- USER-CLI inputs are not sanitised, resulting in creating possible erroneous values (i.e: start offset + end offset)  
+- Display shows 1 error, usually the last frame of media. It's okay but maybe we should fix the video duration variable.  
+- Selecting GIF as an export format is no longer available. Awaiting reimplementation.  
+- Selecting VIDEO and choosing an export does not cater for the correct encoder, resulting in a possible crash and media not exporting.  
+- Dissected frames could be recycled instead of deleted if the user wants to fine tune the same selected media.  
+- Duration floating point should follow the DecimalPlace variable.  
+- "SVL (v1.3)" via the program should be updated to match current SVL version to avoid confusion.  
+- CLI interface should clear the command-line when printing frame export messages.
