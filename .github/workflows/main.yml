@@ -1,0 +1,22 @@
+name: Telegram Message Notify
+
+# Trigger only on commits (push events)
+on:
+  push:
+    branches:
+      - main  # Trigger on commits to the 'main' branch
+
+jobs:
+  notify:
+    # Change the runner to Windows
+    runs-on: windows-latest
+
+    steps:
+    - name: Send Telegram Message
+      uses: appleboy/telegram-action@master
+      with:
+        token: ${{ secrets.TELEGRAM_TOKEN }}  # Your Telegram bot token from repo secrets
+        to: ${{ secrets.TELEGRAM_TO }}        # Your Telegram chat ID from repo secrets
+        message: |
+          New commit in ${{ github.repository }} by ${{ github.actor }}.
+          Commit ID: ${{ github.sha }}
