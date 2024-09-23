@@ -18,5 +18,5 @@ jobs:
         token: ${{ secrets.TELEGRAM_TOKEN }}  # Your Telegram bot token from repo secrets
         to: ${{ secrets.TELEGRAM_TO }}        # Your Telegram chat ID from repo secrets
         message: |
-          New commit in ${{ github.repository }} by ${{ github.actor }}.
-          Commit ID: ${{ github.sha }}
+          ▶ New commit: ${{ github.ref }} for ${{ github.repository }}.
+          ->${{ github.event.head_commit.message }}
