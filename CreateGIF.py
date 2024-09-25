@@ -10,7 +10,8 @@ def create_gif_from_images(image_paths, gif_path, duration):
     - gif_path: Path where the GIF will be saved.
     - duration: Duration of each frame in milliseconds.
     """
-    print(duration)
+    print("Compiling and assembling gif (this may take a while)")
+
     images = []
 
     # Load images using OpenCV and convert to Pillow Image format
@@ -28,7 +29,6 @@ def create_gif_from_images(image_paths, gif_path, duration):
 
     # Save images as GIF using Pillow
     if images:
-        print("Gathering frames.. (this could take a little bit)")
         images[0].save(
             gif_path,
             save_all=True,
@@ -36,7 +36,6 @@ def create_gif_from_images(image_paths, gif_path, duration):
             duration=duration,
             loop=0  # 0 means infinite loop
         )
-        print(f"GIF saved to {gif_path}")
         return gif_path
     else:
         print("No images to create GIF")
